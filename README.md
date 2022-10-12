@@ -1,0 +1,2 @@
+# nouvell
+Minimalist newsletter API
