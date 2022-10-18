@@ -1,3 +1,9 @@
+# Custom
+build/
+pseudo/
+.vscode/
+sam-app/
+
 # Logs
 logs
 *.log
@@ -102,3 +108,6 @@ dist
 
 # TernJS port file
 .tern-port
+*.pseudo
+src/__tests__/tmp.test.ts
+.dccache
