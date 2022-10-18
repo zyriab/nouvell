@@ -14,7 +14,7 @@ export interface DecodedToken extends AuthMetadata {
 }
 
 export interface AppMetadata {
-  key?: string;
+  tenant?: string;
 }
 
 interface AuthMetadata {

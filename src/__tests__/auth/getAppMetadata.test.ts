@@ -12,5 +12,5 @@ test('Should return App metadata', () => {
   const token: DecodedToken = { ...mockToken };
   const result = getAppMetadata(token);
   expect(result).not.toBeUndefined();
-  expect(decrypt(`${result?.key}`)).toEqual('foobar');
+  expect(decrypt(`${result?.tenant}`)).toEqual('foobar');
 });
