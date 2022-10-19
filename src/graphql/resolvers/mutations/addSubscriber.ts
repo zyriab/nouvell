@@ -1,4 +1,3 @@
-import { Types } from 'mongoose';
 import {
   SubscriberInput,
   SubscriberResult,
@@ -12,7 +11,10 @@ import {
   getFormattedProductObject,
   getFormattedOccupationObject,
 } from '../../../utils/tools.utils';
-import { Subscriber as SubscriberModel } from '../../../models/models';
+import {
+  Subscriber as SubscriberModel,
+  Product as ProductModel,
+} from '../../../models/models';
 import {
   isLanguageValid,
   getUpdatedSubscriberProducts,
@@ -59,16 +61,19 @@ export default async function addSubscriber(args: {
         <Subscriber>(<unknown>subscriber)
       );
     } else {
-      subscriber.products = new Types.DocumentArray<Product>(
-        getUpdatedSubscriberProducts(
-          <Product[]>(<unknown>subscriber.products),
-          params.products
-        )
+      const newProducts = getUpdatedSubscriberProducts(
+        <Product[]>(<unknown>subscriber.products),
+        params.products
       );
 
-      await addNonExistingOccupation(params.occupation);
+      if (newProducts.length > 0) {
+        subscriber.products.addToSet(new ProductModel(newProducts));
+      }
+
       subscriber.save();
     }
+
+    await addNonExistingOccupation(params.occupation);
 
     return {
       __typename: 'Subscriber',
