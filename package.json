@@ -1,6 +1,6 @@
 {
   "name": "nouvell",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Minimalist newsletter API",
   "author": "Arthur Wallendorff - Metaoist Dsgn",
   "main": "index.ts",
