@@ -1,10 +1,15 @@
-import { Types } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 import { RequestBody } from '../../../definitions/custom';
 import {
   EditSubscriberInput,
   SubscriberResult,
 } from '../../../definitions/generated/graphql';
-import { GqlError, Occupation, Product } from '../../../definitions/types';
+import {
+  GqlError,
+  Occupation,
+  Product,
+  Subscriber,
+} from '../../../definitions/types';
 import {
   handleErrorResponse,
   checkEmailIsValid,
@@ -12,7 +17,7 @@ import {
   getFormattedProductObject,
   getFormattedOccupationObject,
 } from '../../../utils/tools.utils';
-import { Subscriber } from '../../../models/models';
+import { Subscriber as SubscriberModel } from '../../../models/models';
 import {
   checkSubscriberExists,
   isLanguageValid,
@@ -28,9 +33,11 @@ export default async function editSubscriber(
   try {
     const params = {
       email: args.editSubscriberInput.email.toLowerCase(),
-      occupation: getFormattedOccupationObject(
-        <Occupation>args.editSubscriberInput.occupation
-      ),
+      occupation: args.editSubscriberInput.occupation
+        ? getFormattedOccupationObject(
+            <Occupation>args.editSubscriberInput.occupation
+          )
+        : undefined,
       products: args.editSubscriberInput.products?.map((p) =>
         getFormattedProductObject(p)
       ),
@@ -59,18 +66,15 @@ export default async function editSubscriber(
       throw new Error('Products must be in an array.');
     }
 
-    const subscriber = (await Subscriber.findOne({ email: params.email }))!;
+    const subscriber = <HydratedDocument<Subscriber>>(
+      (await SubscriberModel.findOne({ email: params.email }))!
+    );
 
     if (params.products != null) {
-      params.products = <Product[]>(
-        await filterNonExistingProducts(params.products)
-      );
+      params.products = await filterNonExistingProducts(params.products);
 
-      subscriber.products = new Types.DocumentArray<Product>(
-        getUpdatedSubscriberProducts(
-          <Product[]>(<unknown>subscriber.products),
-          params.products
-        )
+      subscriber.products = <Types.Array<Product>>(
+        getUpdatedSubscriberProducts(subscriber.products, params.products)
       );
     }
 
@@ -96,7 +100,7 @@ export default async function editSubscriber(
       __typename: 'Subscriber',
       email: subscriber.email,
       occupation: subscriber.occupation,
-      products: <Product[]>(<unknown>subscriber.products),
+      products: subscriber.products,
       language: subscriber.language,
     };
   } catch (e) {

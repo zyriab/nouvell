@@ -1,9 +1,9 @@
+import { HydratedDocument, Types } from 'mongoose';
 import {
   SubscriberInput,
   SubscriberResult,
-  Subscriber,
 } from '../../../definitions/generated/graphql';
-import { GqlError, Product } from '../../../definitions/types';
+import { GqlError, Subscriber, Product } from '../../../definitions/types';
 import {
   handleErrorResponse,
   checkEmailIsValid,
@@ -45,32 +45,31 @@ export default async function addSubscriber(args: {
       throw new Error('Products must be in an array.');
     }
 
-    params.products = <Product[]>(
-      await filterNonExistingProducts(params.products)
-    );
+    params.products = await filterNonExistingProducts(params.products);
 
     params.language = (await isLanguageValid(params.language))
       ? params.language
       : 'en';
 
-    let subscriber = await SubscriberModel.findOne({ email: params.email });
+    let subscriber = <HydratedDocument<Subscriber> | null>(
+      await SubscriberModel.findOne({ email: params.email })
+    );
 
     if (subscriber == null) {
       subscriber = await SubscriberModel.create(params);
-      await sendSubscriptionConfirmationEmail(
-        <Subscriber>(<unknown>subscriber)
-      );
+      await sendSubscriptionConfirmationEmail(subscriber);
     } else {
       const newProducts = getUpdatedSubscriberProducts(
-        <Product[]>(<unknown>subscriber.products),
+        subscriber.products,
         params.products
       );
 
       if (newProducts.length > 0) {
-        subscriber.products.addToSet(new ProductModel(newProducts));
+        (<Types.Array<Product>>subscriber.products).addToSet(
+          new ProductModel(newProducts)
+        );
+        subscriber.save();
       }
-
-      subscriber.save();
     }
 
     await addNonExistingOccupation(params.occupation);
@@ -79,7 +78,7 @@ export default async function addSubscriber(args: {
       __typename: 'Subscriber',
       email: subscriber.email,
       occupation: subscriber.occupation,
-      products: <Product[]>(<unknown>subscriber.products),
+      products: subscriber.products,
       language: subscriber.language,
     };
   } catch (e) {
