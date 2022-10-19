@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import emailDataSchema from '../helpers/emailDataSchema.help';
 import { productSchema } from './product';
 import { occupationSchema } from './occupation';
+import { EmailTemplate as TEmailTemplate } from '../definitions/types';
 
 const emailTemplateSchema = new mongoose.Schema({
   type: {
@@ -26,5 +27,8 @@ const emailTemplateSchema = new mongoose.Schema({
   },
 });
 
-const EmailTemplate = mongoose.model('EmailTemplate', emailTemplateSchema);
+const EmailTemplate = mongoose.model<TEmailTemplate>(
+  'EmailTemplate',
+  emailTemplateSchema
+);
 export default EmailTemplate;

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Occupation as TOccupation } from '../definitions/types';
 
 const occupationSchema = new mongoose.Schema({
   name: {
@@ -11,6 +12,6 @@ const occupationSchema = new mongoose.Schema({
   },
 });
 
-const Occupation = mongoose.model('Occupation', occupationSchema);
+const Occupation = mongoose.model<TOccupation>('Occupation', occupationSchema);
 export { occupationSchema };
 export default Occupation;

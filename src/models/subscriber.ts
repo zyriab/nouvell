@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { productSchema } from './product';
 import { occupationSchema } from './occupation';
+import { Subscriber as TSubscriber } from '../definitions/types';
 
 const subscriberSchema = new mongoose.Schema(
   {
@@ -26,5 +27,5 @@ const subscriberSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Subscriber = mongoose.model('Subscriber', subscriberSchema);
+const Subscriber = mongoose.model<TSubscriber>('Subscriber', subscriberSchema);
 export default Subscriber;

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Language as TLanguage } from '../definitions/types';
 
 const languageSchema = new mongoose.Schema({
   name: {
@@ -8,5 +9,5 @@ const languageSchema = new mongoose.Schema({
   },
 });
 
-const Language = mongoose.model('Language', languageSchema);
+const Language = mongoose.model<TLanguage>('Language', languageSchema);
 export default Language;

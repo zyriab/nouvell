@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { productSchema } from './product';
 import { occupationSchema } from './occupation';
+import { SendingEmail as TSendingEmail } from '../definitions/types';
 
 const sendingEmailSchema = new mongoose.Schema({
   displayName: {
@@ -46,5 +47,5 @@ const sendingEmailSchema = new mongoose.Schema({
   },
 });
 
-const SendingEmail = mongoose.model('SendingEmail', sendingEmailSchema);
+const SendingEmail = mongoose.model<TSendingEmail>('SendingEmail', sendingEmailSchema);
 export default SendingEmail;
