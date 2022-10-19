@@ -1,5 +1,5 @@
 import AES from 'crypto-js/aes';
-import Utf8 from 'crypto-js/enc-utf8'
+import Utf8 from 'crypto-js/enc-utf8';
 import { hasJsonStructure } from '../json/json.utils';
 
 // TODO: maybe replace by RSA

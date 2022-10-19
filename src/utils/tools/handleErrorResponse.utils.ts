@@ -1,4 +1,4 @@
-import { ServerError } from "../../definitions/generated/graphql";
+import { ServerError } from '../../definitions/generated/graphql';
 
 export default function handleErrorResponse(error: Error): ServerError {
   if (process.env.NODE_ENV === 'production') {

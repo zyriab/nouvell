@@ -1,4 +1,4 @@
-import { decrypt, encrypt } from '../../utils/crypto.utils'
+import { decrypt, encrypt } from '../../utils/crypto.utils';
 import 'dotenv/config';
 
 beforeAll(() => {
@@ -6,7 +6,6 @@ beforeAll(() => {
 });
 
 test('Should decrypt a given encrypted string', () => {
-
   const result = decrypt(`${encrypt('foobar')}`);
   expect(result).toEqual('foobar');
 });

@@ -1,4 +1,9 @@
-import { addSubscriber, editSubscriber, removeSubscriber, addProduct } from './mutations';
+import {
+  addSubscriber,
+  editSubscriber,
+  removeSubscriber,
+  addProduct,
+} from './mutations';
 
 const gqlResolvers = {
   /* MUTATIONS */

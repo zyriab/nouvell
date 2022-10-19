@@ -1,7 +1,4 @@
-import {
-  hasJsonStructure,
-  safeJsonParse,
-} from '../../utils/json/json.utils';
+import { hasJsonStructure, safeJsonParse } from '../../utils/json/json.utils';
 
 test('Should confirm has JSON structure', () => {
   let foo: any = { bar: 'baz' };
@@ -28,7 +25,7 @@ test('Should confirm has NOT JSON structure', () => {
 });
 
 test('Should safely parse JSON', () => {
-  const foo = { bar: "baz" };
+  const foo = { bar: 'baz' };
   const [error, result] = safeJsonParse(JSON.stringify(foo));
 
   expect(error).toBeUndefined();

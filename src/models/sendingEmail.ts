@@ -18,15 +18,12 @@ const sendingEmailSchema = new mongoose.Schema({
   },
   occupations: {
     type: [occupationSchema],
-    default: [],
   },
   products: {
     type: [productSchema],
-    default: [],
   },
   languages: {
     type: [String],
-    default: ['en'],
     lowercase: true,
     required: true,
   },

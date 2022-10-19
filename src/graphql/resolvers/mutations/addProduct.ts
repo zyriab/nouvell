@@ -6,7 +6,10 @@ import {
 import { GqlError } from '../../../definitions/types';
 import { Product } from '../../../models/models';
 import { checkRequestIsAuthed } from '../../../utils/auth.utils';
-import { getFormattedProductObject, handleErrorResponse } from '../../../utils/tools.utils';
+import {
+  getFormattedProductObject,
+  handleErrorResponse,
+} from '../../../utils/tools.utils';
 
 export default async function addProduct(
   args: { productInput: ProductInput },

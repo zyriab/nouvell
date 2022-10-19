@@ -18,7 +18,6 @@ const emailTemplateSchema = new mongoose.Schema({
   },
   products: {
     type: [productSchema],
-    default: [],
   },
   language: {
     type: String,
