@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // import { RequestBody } from '../../../definitions/custom';
 import { HydratedDocument } from 'mongoose';
 import { SubscriberResult } from '../../../definitions/generated/graphql';
@@ -15,9 +16,13 @@ export default async function removeSubscriber(
   // req: RequestBody
 ): Promise<SubscriberResult | GqlError> {
   try {
+    console.log('Removing subscriber...');
+
     const params = {
       email: args.emailInput.toLowerCase(),
     };
+
+    console.dir(params);
 
     // FIXME: Removed auth until a proper frontend solution has been implemented :)
     // const [authed, authError] = checkRequestIsAuthed(req);

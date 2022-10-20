@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { HydratedDocument, Types } from 'mongoose';
 import {
   SubscriberInput,
@@ -26,6 +27,8 @@ export default async function addSubscriber(args: {
   subscriberInput: SubscriberInput;
 }): Promise<SubscriberResult | GqlError> {
   try {
+    console.log('Adding subscriber...');
+
     const params = {
       email: args.subscriberInput.email.toLowerCase(),
       occupation: getFormattedOccupationObject(args.subscriberInput.occupation),
@@ -34,6 +37,8 @@ export default async function addSubscriber(args: {
       ),
       language: args.subscriberInput.language.toLowerCase(),
     };
+
+    console.dir(params);
 
     const [emailIsValid, emailError] = checkEmailIsValid(params.email);
 

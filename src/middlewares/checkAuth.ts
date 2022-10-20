@@ -24,6 +24,8 @@ export default async function checkAuth(
   next: () => void
 ) {
   try {
+    console.log('Checking auth...');
+
     let decodedToken: AccessToken;
     const authHeader = req.get('Authorization');
     if (!authHeader) {

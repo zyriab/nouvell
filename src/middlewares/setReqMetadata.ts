@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { RequestBody, ResponseBody } from '../definitions/custom';
 import {
   getUserId,
@@ -13,6 +14,8 @@ export default async function setReqMetadata(
   next: () => void
 ) {
   try {
+    console.log('Setting request metadata...');
+
     if (!req.body.isAuth) {
       return next();
     }

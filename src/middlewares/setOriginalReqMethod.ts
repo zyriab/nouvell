@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { RequestBody, ResponseBody } from '../definitions/custom';
 import reqCache from '../utils/fixes/reqCache.utils';
 
@@ -9,6 +10,8 @@ export default function setOriginalReqMethod(
   res: ResponseBody<any>,
   next: () => void
 ) {
+  console.log(`Setting request method ${req.method} to ${reqCache.method}`);
+
   req.method = reqCache.method;
   next();
 }
