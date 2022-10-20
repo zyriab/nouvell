@@ -23,7 +23,7 @@ export default async function filterNonExistingProducts(prodsArr: Product[]) {
 
       tmpProd.category = tmpDoc.category;
       tmpProd.displayName = tmpDoc.displayName;
-      
+
       return tmpProd;
     })
   );

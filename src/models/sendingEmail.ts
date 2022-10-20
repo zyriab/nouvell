@@ -47,5 +47,8 @@ const sendingEmailSchema = new mongoose.Schema({
   },
 });
 
-const SendingEmail = mongoose.model<TSendingEmail>('SendingEmail', sendingEmailSchema);
+const SendingEmail = mongoose.model<TSendingEmail>(
+  'SendingEmail',
+  sendingEmailSchema
+);
 export default SendingEmail;
