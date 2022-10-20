@@ -11,6 +11,6 @@ export default function getUpdatedSubscriberProducts(
       newProducts.filter((x) => x.name.toLowerCase() !== p.name.toLowerCase())
     );
   }
-  
+
   return result;
 }
