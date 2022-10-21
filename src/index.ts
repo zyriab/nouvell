@@ -1,25 +1,30 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-import-module-exports */
-import awsServerlessExpress from 'aws-serverless-express';
+import serverlessExpress from '@vendia/serverless-express';
 import { connectToDatabase } from './utils/database.utils';
 import app from './app';
 import reqCache from './utils/fixes/reqCache.utils';
+import 'source-map-support/register';
 import 'dotenv/config';
 
-require('source-map-support').install();
+let server: any;
 
-const server = awsServerlessExpress.createServer(app);
-
-exports.handler = async (event: any, context: any) => {
-  console.log('Entering handler...');
-  
-  context.callbackWaitsForEmptyEventLoop = false;
-
-  reqCache.method = event.requestContext.http.method;
-
+async function setup(event: any, context: any) {
   await connectToDatabase();
 
-  console.log('Proxying event throught the Express server...');
+  server = serverlessExpress({ app });
+  return server(event, context);
+}
 
-  return awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise;
+exports.handler = (event: any, context: any) => {
+  console.log('Entering handler...');
+
+  context.callbackWaitsForEmptyEventLoop = false;
+  reqCache.method = event.requestContext.http.method;
+
+  if (server != null) {
+    return server(event, context);
+  }
+
+  return setup(event, context);
 };
