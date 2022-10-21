@@ -158,8 +158,6 @@ input SubscribersInput {
 
 input ProductInput {
   name: String!
-  category: String!
-  displayName: String
 }
 
 input OccupationInput {
