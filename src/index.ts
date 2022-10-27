@@ -26,5 +26,6 @@ exports.handler = (event: any, context: any) => {
     return server(event, context);
   }
 
+  console.log('Setup new server and DB connection...')
   return setup(event, context);
 };
