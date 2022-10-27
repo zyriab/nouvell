@@ -1,7 +1,7 @@
 # nouvell
-![GitHub package.json version](https://img.shields.io/github/package-json/v/ZyriabDsgn/buckaroo-sdk)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ZyriabDsgn/buckaroo-sdk)
-![GitHub license](https://img.shields.io/github/license/ZyriabDsgn/buckaroo-sdk)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/ZyriabDsgn/nouvell)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ZyriabDsgn/nouvell)
+![GitHub license](https://img.shields.io/github/license/ZyriabDsgn/nouvell)
 
 A fast-prototyped, scalable and maintainable minimalist newsletter miniservice API leveraging GraphQL, Mongoose/MongoDB and AWS Lambda.
 
