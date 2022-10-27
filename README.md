@@ -12,7 +12,7 @@ A fast-prototyped, scalable and maintainable minimalist newsletter miniservice A
 
 ## Installation
 
-_This guide assumes you have basic knowledge about NPM (also that it's installed) and possess AWS._
+_This guide assumes you have basic knowledge about NPM (also that it's installed) and possess an AWS account._
 
 Automatic CI/CD using GH Actions is not covered in this readme.
 
