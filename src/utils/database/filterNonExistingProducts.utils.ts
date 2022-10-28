@@ -4,15 +4,13 @@ import isProductExisting from './isProductExisting.utils';
 import { ProductInput } from '../../definitions/generated/graphql';
 
 export default async function filterNonExistingProducts(
-  prodsArr: Product[] | ProductInput[]
+  prodsArr: ProductInput[]
 ): Promise<Product[]> {
   const prodsExist: boolean[] = await Promise.all(
     prodsArr.map((p) => isProductExisting(p))
   );
 
-  let filteredProds: Product[] | ProductInput[] = prodsArr.filter(
-    (p, i) => prodsExist[i]
-  );
+  let filteredProds = prodsArr.filter((p, i) => prodsExist[i]);
 
   if (filteredProds.length === 0) {
     throw new Error('No products left after filtering non-existing ones!');
