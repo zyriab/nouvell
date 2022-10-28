@@ -42,7 +42,7 @@ export default async function sendConfirmationEmail(subscriber: Subscriber) {
     }</li>`;
   }
 
-  sendEmail({
+  await sendEmail({
     sender: <SendingEmail>(<unknown>sendingEmail),
     recipients: [subscriber],
     emailData: {

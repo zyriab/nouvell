@@ -25,7 +25,7 @@ export default async function sendConfirmationEmail(subscriber: Subscriber) {
     throw new Error('Confirmation email could not be found in database.');
   }
 
-  sendEmail({
+  await sendEmail({
     sender: <SendingEmail>(<unknown>sendingEmail),
     recipients: [subscriber],
     emailData: template.data,
