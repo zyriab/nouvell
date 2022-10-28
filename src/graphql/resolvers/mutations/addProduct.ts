@@ -1,6 +1,6 @@
 import { RequestBody } from '../../../definitions/custom';
 import {
-  ProductInput,
+  ProductCreationInput,
   ProductResult,
 } from '../../../definitions/generated/graphql';
 import { GqlError } from '../../../definitions/types';
@@ -12,19 +12,21 @@ import {
 } from '../../../utils/tools.utils';
 
 export default async function addProduct(
-  args: { productInput: ProductInput },
+  args: { productInput: ProductCreationInput },
   req: RequestBody
 ): Promise<ProductResult | GqlError> {
   try {
-    const params = getFormattedProductObject(args.productInput);
-
     const [authed, authError] = checkRequestIsAuthed(req);
-
+    
     if (!authed) {
       return authError!;
     }
 
-    const product = await Product.findOne({ name: params.name });
+    const params = getFormattedProductObject(args.productInput);
+
+    const product = await Product.findOne({
+      name: params.name,
+    });
 
     if (product == null) {
       await Product.create(params);

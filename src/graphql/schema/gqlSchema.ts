@@ -160,6 +160,12 @@ input ProductInput {
   name: String!
 }
 
+input ProductCreationInput {
+  name: String!
+  category: String!
+  displayName: String!
+}
+
 input OccupationInput {
   name: String!
   displayName: String
@@ -264,7 +270,7 @@ type Mutations {
   editSubscriber(editSubscriberInput: EditSubscriberInput!): SubscriberResult
   addOccupation(occupationInput: OccupationInput!): OccupationResult
   removeOccupation(occupationInput: OccupationInput!): OccupationResult
-  addProduct(productInput: ProductInput!): ProductResult
+  addProduct(productInput: ProductCreationInput!): ProductResult
   removeProduct(nameInput: String!): ProductResult
   addLanguage(languageInput: String!): LanguageResult
   removeLanguage(languageInput: String!): LanguageResult

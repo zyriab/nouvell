@@ -14,7 +14,6 @@ import {
   handleErrorResponse,
   checkEmailIsValid,
   filterNonExistingProducts,
-  getFormattedProductObject,
   getFormattedOccupationObject,
 } from '../../../utils/tools.utils';
 import { Subscriber as SubscriberModel } from '../../../models/models';
@@ -38,9 +37,7 @@ export default async function editSubscriber(
             <Occupation>args.editSubscriberInput.occupation
           )
         : undefined,
-      products: args.editSubscriberInput.products?.map((p) =>
-        getFormattedProductObject(p)
-      ),
+      products: args.editSubscriberInput.products,
       language: args.editSubscriberInput.language?.toLowerCase(),
     };
 
@@ -74,7 +71,10 @@ export default async function editSubscriber(
       params.products = await filterNonExistingProducts(params.products);
 
       subscriber.products = <Types.Array<Product>>(
-        getUpdatedSubscriberProducts(subscriber.products, params.products)
+        getUpdatedSubscriberProducts(
+          subscriber.products,
+          <Product[]>params.products
+        )
       );
     }
 

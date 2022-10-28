@@ -9,7 +9,6 @@ import {
   handleErrorResponse,
   checkEmailIsValid,
   filterNonExistingProducts,
-  getFormattedProductObject,
   getFormattedOccupationObject,
 } from '../../../utils/tools.utils';
 import {
@@ -32,9 +31,7 @@ export default async function addSubscriber(args: {
     const params = {
       email: args.subscriberInput.email.toLowerCase(),
       occupation: getFormattedOccupationObject(args.subscriberInput.occupation),
-      products: args.subscriberInput.products.map((p) =>
-        getFormattedProductObject(p)
-      ),
+      products: args.subscriberInput.products,
       language: args.subscriberInput.language.toLowerCase(),
     };
 
@@ -66,7 +63,7 @@ export default async function addSubscriber(args: {
     } else {
       const newProducts = getUpdatedSubscriberProducts(
         subscriber.products,
-        params.products
+        <Product[]>params.products
       );
 
       if (newProducts.length > 0) {

@@ -149,7 +149,7 @@ export type MutationsAddOccupationArgs = {
 
 
 export type MutationsAddProductArgs = {
-  productInput: ProductInput;
+  productInput: ProductCreationInput;
 };
 
 
@@ -236,6 +236,12 @@ export type Product = {
   __typename?: 'Product';
   category: Scalars['String'];
   displayName?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+export type ProductCreationInput = {
+  category: Scalars['String'];
+  displayName: Scalars['String'];
   name: Scalars['String'];
 };
 
@@ -486,6 +492,7 @@ export type ResolversTypes = {
   Occupations: ResolverTypeWrapper<Occupations>;
   OccupationsResult: ResolversTypes['Occupations'] | ResolversTypes['ServerError'] | ResolversTypes['Unauthenticated'];
   Product: ResolverTypeWrapper<Product>;
+  ProductCreationInput: ProductCreationInput;
   ProductInput: ProductInput;
   ProductResult: ResolversTypes['Product'] | ResolversTypes['ServerError'] | ResolversTypes['Unauthenticated'];
   Products: ResolverTypeWrapper<Products>;
@@ -541,6 +548,7 @@ export type ResolversParentTypes = {
   Occupations: Occupations;
   OccupationsResult: ResolversParentTypes['Occupations'] | ResolversParentTypes['ServerError'] | ResolversParentTypes['Unauthenticated'];
   Product: Product;
+  ProductCreationInput: ProductCreationInput;
   ProductInput: ProductInput;
   ProductResult: ResolversParentTypes['Product'] | ResolversParentTypes['ServerError'] | ResolversParentTypes['Unauthenticated'];
   Products: Products;
