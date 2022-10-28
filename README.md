@@ -1,3 +1,4 @@
+
 <p align="center"><img
   src="https://www.wallenart.dev/src/images/nouvell.svg"
   alt="nouvell logo" /></p>
@@ -186,22 +187,22 @@ async function addSubscriber(args: AddSubscriberArgs) {
   if(subscriber != null) {
     console.log(subscriber);
     
-    // subscriber: {
-		// 	__typename: 'Subscriber',
-		// 	email: 'example@email.com',
-		// 	products: [
-		// 		{
-		// 			name: 'some-product',
-		// 			category: 'the-category',
-		// 			displayName: 'Some Product',
-		// 		}
-		// 	],
-		// 	occupation: {
-		// 		name: 'merchant',
-		// 		displayName: 'Merchant'
-		// 	},
-		// 	language: 'fr',
-		// }
+        // subscriber: {
+        // 	__typename: 'Subscriber',
+	// 	email: 'example@email.com',
+	// 	products: [
+	// 		{
+	// 		  name: 'some-product',
+	// 		  category: 'the-category',
+	// 		  displayName: 'Some Product',
+	// 		}
+	// 	],
+	// 	occupation: {
+	// 		name: 'merchant',
+	// 		displayName: 'Merchant'
+	// 	},
+	// 	language: 'fr',
+	// }
 	}
   }
 }
