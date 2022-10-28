@@ -19,6 +19,7 @@ import {
   isLanguageValid,
   getUpdatedSubscriberProducts,
   addNonExistingOccupation,
+  getProduct,
 } from '../../../utils/database.utils';
 import { sendSubscriptionConfirmationEmail } from '../../../utils/email.utils';
 
@@ -31,7 +32,9 @@ export default async function addSubscriber(args: {
     const params = {
       email: args.subscriberInput.email.toLowerCase(),
       occupation: getFormattedOccupationObject(args.subscriberInput.occupation),
-      products: args.subscriberInput.products,
+      products: await Promise.all(
+        args.subscriberInput.products.map((p) => getProduct(p.name))
+      ),
       language: args.subscriberInput.language.toLowerCase(),
     };
 

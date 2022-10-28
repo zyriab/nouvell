@@ -22,6 +22,7 @@ import {
   isLanguageValid,
   getUpdatedSubscriberProducts,
   addNonExistingOccupation,
+  getProduct,
 } from '../../../utils/database.utils';
 import { checkRequestIsAuthed } from '../../../utils/auth.utils';
 
@@ -37,7 +38,11 @@ export default async function editSubscriber(
             <Occupation>args.editSubscriberInput.occupation
           )
         : undefined,
-      products: args.editSubscriberInput.products,
+      products: args.editSubscriberInput.products
+        ? await Promise.all(
+            args.editSubscriberInput.products?.map((p) => getProduct(p.name))
+          )
+        : undefined,
       language: args.editSubscriberInput.language?.toLowerCase(),
     };
 
