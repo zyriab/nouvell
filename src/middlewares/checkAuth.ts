@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import jwt from 'jsonwebtoken';
 import jwksClient from 'jwks-rsa';
 import { RequestBody, ResponseBody } from '../definitions/custom';
