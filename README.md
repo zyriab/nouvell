@@ -1,6 +1,6 @@
 
 <p align="center"><img
-  src="https://raw.githubusercontent.com/zyriab/wallenart/main/src/images/nouvell.svg?token=GHSAT0AAAAAACLSUYNFH7IKNZC7WGOIC5NAZNPB7AQ"
+  src="logo.svg"
   alt="nouvell logo" /></p>
  
  <p align="center">
